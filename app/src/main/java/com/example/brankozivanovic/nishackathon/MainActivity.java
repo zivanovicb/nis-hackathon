@@ -14,7 +14,11 @@ package com.example.brankozivanovic.nishackathon;
         import android.view.View;
         import android.view.WindowManager;
         import android.widget.ImageView;
+        import android.widget.ListView;
         import android.widget.Toast;
+
+        import java.util.Arrays;
+        import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,20 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
                 mWindowManager.addView(mChatHeadView, params);
 
-                //Set the close button.
-/*
-                ImageView closeButton = (ImageView) mChatHeadView.findViewById(R.id.close_btn);
-                closeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //close the service and remove the chat head from the window
-
-                    }
-
-
-                });
-*/
-
+                ListView list = mChatHeadView.findViewById(R.id.list);
+                List<String> strings = Arrays.asList("aa","aa");
+                PopUpAdapter adapter = new PopUpAdapter(getApplicationContext(),strings);
+                list.setAdapter(adapter);
 
             }
         });
