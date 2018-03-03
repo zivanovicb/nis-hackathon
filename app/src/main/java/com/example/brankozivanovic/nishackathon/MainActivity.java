@@ -18,6 +18,7 @@ package com.example.brankozivanovic.nishackathon;
         import android.widget.ListView;
         import android.widget.Toast;
 
+        import com.example.brankozivanovic.nishackathon.service.ChatHeadService;
         import com.example.brankozivanovic.nishackathon.service.OverlayService;
 
         import java.util.Arrays;
@@ -45,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
                     Uri.parse("package:" + getPackageName()));
             startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
         } else {
-       */     Intent svc = new Intent(this, OverlayService.class);
+       */     Intent svc = new Intent(this, ChatHeadService.class);
             startService(svc);
-        initializeView();
+       // initializeView();
             //finish();
         //}
     }
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //mWindowManager.removeViewImmediate(mChatHeadView);
+                        mWindowManager.removeViewImmediate(mChatHeadView);
                         //mWindowManager.removeView(mChatHeadView);
                     }
                 });

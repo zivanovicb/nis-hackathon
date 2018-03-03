@@ -27,6 +27,9 @@ public class OverlayService extends Service implements OnTouchListener, OnClickL
     private int originalXPos;
     private int originalYPos;
     private boolean moving;
+
+
+
     private WindowManager wm;
 
     @Override
