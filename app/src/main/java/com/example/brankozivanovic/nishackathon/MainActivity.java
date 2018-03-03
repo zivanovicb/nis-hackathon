@@ -13,9 +13,12 @@ package com.example.brankozivanovic.nishackathon;
         import android.view.MotionEvent;
         import android.view.View;
         import android.view.WindowManager;
+        import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.ListView;
         import android.widget.Toast;
+
+        import com.example.brankozivanovic.nishackathon.service.OverlayService;
 
         import java.util.Arrays;
         import java.util.List;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //Check if the application has draw over other apps permission or not?
         //This permission is by default available for API<23. But for API > 23
         //you have to ask for the permission in runtime.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
             //If the draw over permission is not available open the settings screen
             //to grant the permission.
@@ -42,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
                     Uri.parse("package:" + getPackageName()));
             startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
         } else {
-            initializeView();
-        }
+       */     Intent svc = new Intent(this, OverlayService.class);
+            startService(svc);
+        initializeView();
+            //finish();
+        //}
     }
 
 
@@ -78,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
                 List<String> strings = Arrays.asList("aa","aa");
                 PopUpAdapter adapter = new PopUpAdapter(getApplicationContext(),strings);
                 list.setAdapter(adapter);
+
+                ImageButton close = mChatHeadView.findViewById(R.id.close);
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //mWindowManager.removeViewImmediate(mChatHeadView);
+                        //mWindowManager.removeView(mChatHeadView);
+                    }
+                });
 
             }
         });
