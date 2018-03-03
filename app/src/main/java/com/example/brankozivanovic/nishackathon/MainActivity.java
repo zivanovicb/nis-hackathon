@@ -18,17 +18,26 @@ package com.example.brankozivanovic.nishackathon;
         import android.widget.ListView;
         import android.widget.Toast;
 
+        import com.example.brankozivanovic.nishackathon.networking.Api;
+        import com.example.brankozivanovic.nishackathon.networking.ApiUtill;
+        import com.example.brankozivanovic.nishackathon.pojo.PostPump;
         import com.example.brankozivanovic.nishackathon.service.ChatHeadService;
         import com.example.brankozivanovic.nishackathon.service.OverlayService;
+        import com.google.gson.Gson;
 
         import java.util.Arrays;
         import java.util.List;
+
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
     private WindowManager mWindowManager;
     private View mChatHeadView;
+    private Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
        // initializeView();
             //finish();
         //}
+
+        goGetPump();
     }
 
 
@@ -117,6 +128,27 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void goGetPump(){
+        ApiUtill.getApi().postPump("123","312").enqueue(new Callback<List<PostPump>>() {
+            @Override
+            public void onResponse(Call<List<PostPump>> call, Response<List<PostPump>> response) {
+                if(response.isSuccessful()){
+                    System.out.println("aaa");
+
+
+                }else {
+                    Log.e("RESPONSE FAILED","RESPONSE FAILED");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PostPump>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
     }
 
 
