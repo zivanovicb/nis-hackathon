@@ -135,7 +135,13 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<PostPump>> call, Response<List<PostPump>> response) {
                 if(response.isSuccessful()){
                     System.out.println("aaa");
-                    setupList(response.body());
+                    RecyclerView recycler = mChatHeadView.findViewById(R.id.recycler);
+                    RecyclerView.LayoutManager manager = new  LinearLayoutManager(MainActivity.this);
+                    RecyclerAdapter adapter = new RecyclerAdapter(MainActivity.this,response.body());
+                    recycler.setLayoutManager(manager);
+                    recycler.setAdapter(adapter);
+
+                    Log.e("GOSPODI","KOMITUJ");
 
 
                 }else {
@@ -153,13 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setupList(List<PostPump> popusti){
-        RecyclerView recycler = mChatHeadView.findViewById(R.id.recycler);
-        RecyclerView.LayoutManager manager = new  LinearLayoutManager(this);
-        RecyclerAdapter adapter = new RecyclerAdapter(this,popusti);
-        recycler.setLayoutManager(manager);
-        recycler.setAdapter(adapter);
-    }
 
 
 }
