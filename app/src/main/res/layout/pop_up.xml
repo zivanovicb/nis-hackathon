@@ -83,8 +83,8 @@
         android:textColor="@android:color/holo_blue_dark"
         />
 
-    <ListView
-        android:id="@+id/list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -100,7 +100,7 @@
         android:backgroundTint="#17C1AB"
         android:text="nastavi do kase"
         android:textColor="@android:color/white"
-        android:layout_below="@id/list"
+        android:layout_below="@id/recycler"
         android:layout_centerHorizontal="true"
 
         />

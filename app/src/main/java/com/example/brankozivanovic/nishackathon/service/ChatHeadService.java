@@ -59,10 +59,9 @@ public class ChatHeadService extends Service {
         //Drag and move chat head using user's touch action.
         final ImageView chatHeadImage = (ImageView) mChatHeadView.findViewById(R.id.chat_head_profile_iv);
 
-        ListView list = mChatHeadView.findViewById(R.id.list);
+        //ListView list = mChatHeadView.findViewById(R.id.list);
         List<String> strings = Arrays.asList("aa","aa");
-        PopUpAdapter adapter = new PopUpAdapter(getApplicationContext(),strings);
-        list.setAdapter(adapter);
+
 
         ImageButton close = mChatHeadView.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {

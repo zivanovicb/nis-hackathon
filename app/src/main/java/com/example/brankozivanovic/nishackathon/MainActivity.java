@@ -7,6 +7,8 @@ package com.example.brankozivanovic.nishackathon;
         import android.provider.Settings;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
         import android.util.Log;
         import android.view.Gravity;
         import android.view.LayoutInflater;
@@ -92,10 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
                 mWindowManager.addView(mChatHeadView, params);
 
-                ListView list = mChatHeadView.findViewById(R.id.list);
-                List<String> strings = Arrays.asList("aa","aa");
-                PopUpAdapter adapter = new PopUpAdapter(getApplicationContext(),strings);
-                list.setAdapter(adapter);
+
 
                 ImageButton close = mChatHeadView.findViewById(R.id.close);
                 close.setOnClickListener(new View.OnClickListener() {
@@ -136,10 +135,13 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<PostPump>> call, Response<List<PostPump>> response) {
                 if(response.isSuccessful()){
                     System.out.println("aaa");
+                    setupList(response.body());
 
 
                 }else {
                     Log.e("RESPONSE FAILED","RESPONSE FAILED");
+                    Log.e("RAW",response.raw().toString());
+                    System.out.println("Od golgote do kalkute");
                 }
             }
 
@@ -149,6 +151,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setupList(List<PostPump> popusti){
+        RecyclerView recycler = mChatHeadView.findViewById(R.id.recycler);
+        RecyclerView.LayoutManager manager = new  LinearLayoutManager(this);
+        RecyclerAdapter adapter = new RecyclerAdapter(this,popusti);
+        recycler.setLayoutManager(manager);
+        recycler.setAdapter(adapter);
     }
 
 
